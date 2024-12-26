@@ -44,4 +44,7 @@ public class ReminderController {
         return reminderService.getAllRemindersSorted(sort);
     }
 
+    void forGit(){
+        System.out.println("дай запушить");
+    }
 }
