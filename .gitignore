@@ -13,6 +13,11 @@ build/
 .settings
 .springBeans
 .sts4-cache
+.gitattributes
+.gitignore
+gradlew.bat
+settings.gradle
+gradlew
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/

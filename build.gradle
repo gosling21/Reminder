@@ -24,14 +24,28 @@ repositories {
 }
 
 dependencies {
+    //Стартеры
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    compileOnly 'org.projectlombok:lombok'
-    runtimeOnly 'org.postgresql:postgresql'
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-quartz'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 
+    //База
+    implementation 'org.liquibase:liquibase-core'
+    implementation 'org.postgresql:postgresql'
+    compileOnly 'org.projectlombok:lombok:1.18.36'
+
+    //Утилиты
+
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+    implementation 'org.telegram:telegrambots:6.9.7.1'
+
+
+
+    //Тесты
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 

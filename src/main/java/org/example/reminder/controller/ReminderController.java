@@ -1,20 +1,30 @@
 package org.example.reminder.controller;
 
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.example.reminder.model.Reminder;
 
 import org.example.reminder.service.ReminderServiceImpl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping ("/api/v1/reminder")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ReminderController {
+
+    @Autowired
+    public ReminderController(ReminderServiceImpl reminderService) {
+        this.reminderService = reminderService;
+    }
 
     private final ReminderServiceImpl reminderService;
 
@@ -23,19 +33,21 @@ public class ReminderController {
         reminderService.createReminder(reminder);
     }
 
+
     @DeleteMapping("/delete/{id}")
     public void deleteReminder(@PathVariable Long id) {
-        reminderService.deleteById(id);
+        reminderService.deleteReminder(id);
     }
 
-    @PutMapping
-    public void updateReminder(@RequestBody Reminder reminder) {
-
+    /*@PutMapping("/update/{id}")
+    public void updateReminder(@PathVariable Long id, @RequestBody Reminder updatedReminder) {
+        reminderService.updateReminder(id, updatedReminder);
     }
-
+    */
     @GetMapping("/list")
-    public List<Reminder> getAllReminders() {
-        return reminderService.getAllReminders();
+    public Map<String, Object> getAllReminders(@RequestParam(defaultValue = "0") int page,
+                                               @RequestParam(defaultValue = "5") int size) {
+        return reminderService.getAllRemindersPaged(page, size);
     }
 
     @GetMapping("/sort")
@@ -44,7 +56,11 @@ public class ReminderController {
         return reminderService.getAllRemindersSorted(sort);
     }
 
-    void forGit(){
-        System.out.println("дай запушить");
+
+    // todo: фильтр
+    /*@GetMapping("/filtr/date/{day}/{month}/{year}")
+    public List<Reminder> filterReminders(@PathVariable int day, @PathVariable int month, @PathVariable int year) {
+        return reminderService.filterReminders(day, month, year);
     }
+*/
 }

@@ -8,6 +8,7 @@ import lombok.NonNull;
 import org.antlr.v4.runtime.misc.NotNull;
 import org.springframework.lang.NonNullApi;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 
@@ -20,10 +21,14 @@ public class Reminder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String title;
-    private String description;
-    private LocalDateTime remind;
-    private Long userId;
 
-    //@OneToMany(cascade = CascadeType.ALL)
+    private String title;
+
+    private String description;
+
+    private LocalDate remind;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 }
